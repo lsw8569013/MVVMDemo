@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#F57C00</color>
+    <color name="white_milk">#FFF9F9F9</color>
+    <color name="text_hint_color">#FFBDBDBD</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FFC4C4C4</color>
+    <color name="text_gray">#999</color>
+    <color name="transparent">#000</color>
+
+    <color name="ban_black">#55000000</color>
+
+    <color name="textColor">#202020</color>
+    <color name="textColorHint">#A0A0A0</color>
+    <color name="textColorVice">#6C6C6C</color>
+    <color name="viewLineColor">#F0F0F0</color>
+    <color name="teal">#00796B</color>
+    <color name="brown">#8D6E63</color>
+    <color name="blue">#2196F3</color>
+    <color name="grey">#607D8B</color>
+    <color name="orange">#F57C00</color>
+    <color name="milk_yellow">#FFFFB63F</color>
+    <color name="screen">#FF78D710</color>
+    <color name="black">#000</color>
+    <color name="gray_item">#4d485769</color>
+    <color name="item_black">#FF606060</color>
+    <color name="touming_black_item">#FF606060</color>
+    <color name="little_back">#FF485769</color>
+    <color name="gray_no_data">#11696767</color>
+
+</resources>

@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="mySwitch" parent="Theme.AppCompat.Light">
+        <!-- switch 打开时的按钮的颜色 轨迹颜色默认为30%（看效果就明白30%是怎么回事了）这个颜色 -->
+        <item name="colorControlActivated">#FFFF7A09</item>
+        <!--  switch关闭时的按钮的颜色 -->
+        <item name="colorSwitchThumbNormal">#FFFF6158</item>
+        <!-- switch关闭时的轨迹的颜色 30%这个颜色 -->
+        <item name="android:colorForeground">@color/text_gray</item>
+
+    </style>
+
+    <style name="popupAnimationAlpha" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/alpha_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_scale_out</item>
+        <item name="android:windowShowAnimation">@anim/alpha_scale_in</item>
+        <item name="android:windowHideAnimation">@anim/alpha_scale_out</item>
+        <item name="colorAccent">#FFEF7504</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+</resources>
