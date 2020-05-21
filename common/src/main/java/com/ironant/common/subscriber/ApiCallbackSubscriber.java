@@ -78,7 +78,7 @@ public class ApiCallbackSubscriber<T> extends ApiSubscriber<T> implements IBaseL
 
     @Override
     public void onCreate() {
-        LogUtil.e("界面 onStop http dispose");
+        LogUtil.e("界面 onCreate ");
     }
 
     @Override
@@ -88,7 +88,7 @@ public class ApiCallbackSubscriber<T> extends ApiSubscriber<T> implements IBaseL
 
     @Override
     public void onStart() {
-        LogUtil.e("界面 onStop http dispose");
+        LogUtil.e("界面 onStart ");
     }
 
     @Override
@@ -99,12 +99,12 @@ public class ApiCallbackSubscriber<T> extends ApiSubscriber<T> implements IBaseL
 
     @Override
     public void onResume() {
-
+        LogUtil.e("界面 onResume ");
     }
 
     @Override
     public void onPause() {
-
+        LogUtil.e("界面 onPause ");
     }
 
     @Override
