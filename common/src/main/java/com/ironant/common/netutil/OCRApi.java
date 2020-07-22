@@ -1,66 +1,80 @@
-package com.ironant.common.netutil.base;
+package com.ironant.common.netutil;
 
 
 
+import com.ironant.common.BuildConfig;
 import com.ironant.common.netutil.interceptor.CommonRequestInterceptor;
 import com.ironant.common.utils.LogUtil;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * 适配多域名的api 实际请求的api  OCR
  * @author liushengwei
  * @description: https://github.com/lsw8569013
- * @date :2020-02-14 12:55
+ * @date :2020-02-14 17:22
  */
-public abstract class NetWorkApi implements INetWorkInfo {
+public class OCRApi {
 
-    private static String baseUrl ;
+    private  String baseUrl;
+    private String token;
 
-    private static final String BASE_URL = "http://t.weather.sojson.com/api/weather/";
     public volatile static Retrofit retrofit = null;
-    public static INetWorkInfo netWorkInfo ;
+
     private static OkHttpClient okHttpClient;
+    private CommonRequestInterceptor interceptor;
 
-    protected NetWorkApi(String baseUrl){
-        this.baseUrl = baseUrl;
-        init(this);
+
+    private static volatile OCRApi mInstance;
+
+    public static OCRApi getInstance() {
+        if (mInstance == null) {
+            synchronized (OCRApi.class) {
+                mInstance = new OCRApi();
+            }
+        }
+        return mInstance;
     }
 
-    public static void init(INetWorkInfo mINetworkInfo){
-        netWorkInfo = mINetworkInfo;
+    protected OCRApi() {
+//
+        baseUrl = "http://www.etoplive.com/ocr/";
+//        super("https://api.weixin.qq.com/");
+//        super("http://47.105.206.32/ant/");
     }
 
-    protected    Retrofit getRetrofit() {
+    public static <T> T getService(Class<T> clazz) {
+        return getInstance().getRetrofit().create(clazz);
+    }
+
+
+
+
+    private Retrofit getRetrofit() {
         if(retrofit == null){
             synchronized (Retrofit.class){
                 if(retrofit == null){
                     retrofit = new Retrofit.Builder()
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .baseUrl(baseUrl)
                             .client(getOkhttpClient())
+                            .baseUrl(baseUrl)
                             .build();
-                }
+            }
             }
         }
         return retrofit;
     }
 
-
-
-
-    protected  OkHttpClient getOkhttpClient() {
+    protected OkHttpClient getOkhttpClient() {
         if(okHttpClient == null){
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.addInterceptor(new CommonRequestInterceptor(netWorkInfo));
-//            builder.addInterceptor(getInterceptor());
-            if(netWorkInfo != null && netWorkInfo.isDebug()){
+//            builder.addInterceptor(interceptor);
+            if(isDebug()){
                 HttpLoggingInterceptor httpLogInterceptor =  new HttpLoggingInterceptor();
                 httpLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
                 builder.addNetworkInterceptor(httpLogInterceptor);
@@ -73,5 +87,9 @@ public abstract class NetWorkApi implements INetWorkInfo {
         return okHttpClient;
     }
 
-    protected abstract Interceptor getInterceptor();
+
+
+    public boolean isDebug() {
+        return BuildConfig.DEBUG;
+    }
 }

@@ -56,15 +56,17 @@ public class ApiCallbackSubscriber<T> extends ApiSubscriber<T> implements IBaseL
     public void onNext(T t) {
         this.data = t;
         try {
-            callBack.onSuccess(t);
+            callBack.onSuccessParent(t);
         }catch (Exception e){
-            Log.e("http ApiCallback","http OK ，UI   --- crash ");
+            Log.e("http ApiCallback","http OK ，UI   --- crash "+e.getMessage());
             e.printStackTrace();
+            callBack.onFail(0, e.getMessage());
         }
     }
 
     @Override
     public void onComplete() {
+        callBack.onComplete();
     }
 
     public T getData() {

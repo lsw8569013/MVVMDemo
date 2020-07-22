@@ -69,18 +69,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             }
         });
 
-        viewModel.isShowDialogData.observe(this, new androidx.lifecycle.Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean showD) {
-                if(!showD){
-//                    LogUtil.e("title == null");
-                    dismissDialog();
-                }else{
-//                    LogUtil.e("title != null");
-                    showDialog("登陆");
-                }
-            }
-        });
+
 
     }
 

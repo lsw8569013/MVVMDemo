@@ -9,4 +9,6 @@ public interface INetWorkInfo {
     String getAppVersionName();
     String getAPPVersionCode();
     boolean isDebug();
+    String getToken();
+    void setToken(String token);
 }

@@ -16,6 +16,6 @@ public class DownCallbackSubscriber<T> extends ApiCallbackSubscriber<T> {
     @Override
     public void onComplete() {
         super.onComplete();
-        callBack.onSuccess(super.data);
+        callBack.onSuccessParent(super.data);
     }
 }

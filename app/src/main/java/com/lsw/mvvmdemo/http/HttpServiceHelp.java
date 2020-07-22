@@ -149,8 +149,10 @@ public class HttpServiceHelp {
 //        @GET("weather/json.shtml")
 //        Observable<WeatherBean> getWeather(@Query("city") String city);
 
-        @GET("city/{citycode}")
-        Observable<WeatherBean> getWeather(@Path("citycode") String citycode);
+        @GET("/api")
+        Observable<WeatherBean> getWeather(@Query("version") String version
+        ,@Query("appid") String appid
+                ,@Query("appsecret") String appsecret);
     }
 
     /**

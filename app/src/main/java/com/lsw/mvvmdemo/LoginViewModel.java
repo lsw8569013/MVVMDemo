@@ -50,26 +50,31 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     /**
-     * 网络模拟一个登陆操作
+     * 网络模拟一个请求事例
      **/
     public void login() {
         LogUtil.e("login --");
-        if (TextUtils.isEmpty(userName.get())) {
-            ToastUtils.showShort("请输入账号！");
-            return;
-        }
-        if (TextUtils.isEmpty(password.get())) {
-            ToastUtils.showShort("请输入密码！");
-            return;
-        }
+//        if (TextUtils.isEmpty(userName.get())) {
+//            ToastUtils.showShort("请输入账号！");
+//            return;
+//        }
+//        if (TextUtils.isEmpty(password.get())) {
+//            ToastUtils.showShort("请输入密码！");
+//            return;
+//        }
         showDialog("登陆中");
         ToastUtils.showShort("login");
-        NetRetrofitUtil.getWeather("101030100",new ApiCallbackSubscriber(this,new NetCallBack<WeatherBean>() {
+        NetRetrofitUtil.getWeather("v9",new ApiCallbackSubscriber<>(this,new NetCallBack<WeatherBean>() {
+
             @Override
-            public void onSuccess(WeatherBean data) {
+            public void onSuccessParent(WeatherBean data) {
                 LogUtil.e("请求成功！！");
-                dismissDialog();
                 LogUtil.e(data.getDate());
+            }
+
+            @Override
+            public void onComplete() {
+                dismissDialog();
             }
         }));
 

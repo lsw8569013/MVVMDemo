@@ -15,10 +15,10 @@ import com.lsw.mvvmdemo.bean.WeatherBean;
  */
 public class NetRetrofitUtil {
 
-    public static void getWeather(String city, ApiCallbackSubscriber apiCallbackSubscriber) {
+    public static void getWeather(String version, ApiCallbackSubscriber apiCallbackSubscriber) {
         CommonNetApi.
                 getService(HttpServiceHelp.getWeatherRX.class)
-                .getWeather(city)
+                .getWeather(version,"23035354","8YvlPNrz")
                 .compose(ApiTransformer.<WeatherBean>norTransformer())
                 .subscribe(apiCallbackSubscriber);
 

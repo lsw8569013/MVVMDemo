@@ -1,11 +1,9 @@
 package com.ironant.common.base;
 
 
-
 import android.content.Intent;
 
 import android.os.Bundle;
-
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +15,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ironant.common.utils.LogUtil;
 import com.ironant.common.utils.MaterialDialogUtils;
@@ -26,15 +23,12 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 
-
-
-
 /**
  * Created by goldze on 2017/6/15.
  * 一个拥有DataBinding框架的基Activity
  * 这里根据项目业务可以换成你自己熟悉的BaseActivity, 但是需要继承RxAppCompatActivity,方便LifecycleProvider管理生命周期
  */
-public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel > extends AppCompatActivity  {
+public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
     protected V binding;
     protected VM viewModel;
     private int viewModelId;
@@ -50,7 +44,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
 
     }
-
 
 
     /**
@@ -77,6 +70,19 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         binding.setVariable(viewModelId, viewModel);
         //让ViewModel拥有View的生命周期感应
         getLifecycle().addObserver(viewModel);
+
+
+        viewModel.isShowDialogData.observe(this, new androidx.lifecycle.Observer<Boolean>() {
+            //
+            @Override
+            public void onChanged(Boolean showD) {
+                if (!showD) {
+                    dismissDialog();
+                } else {
+                    showDialog("登陆");
+                }
+            }
+        });
     }
 
     protected abstract void initData();
@@ -92,10 +98,10 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public synchronized void showDialog(String title) {
         if (dialog != null) {
             dialog = dialog.getBuilder().title(title).build();
-            if(!dialog.isShowing()){
+            if (!dialog.isShowing()) {
 //                LogUtil.e("dialog 没有显示");
                 dialog.show();
-            }else{
+            } else {
 //                LogUtil.e("dialog 显示");
             }
         } else {
@@ -118,7 +124,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         //解除Messenger注册
 //        Messenger.getDefault().unregister(viewModel);
 
-        if(binding != null){
+        if (binding != null) {
             binding.unbind();
         }
     }
@@ -135,7 +141,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     /**
      * 跳转页面
      *
-     * @param clz    所跳转的目的Activity类
+     * @param clz 所跳转的目的Activity类
      * @param bundle 跳转所携带的信息
      */
     public void startActivity(Class<?> clz, Bundle bundle) {
@@ -145,7 +151,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         }
         startActivity(intent);
     }
-
 
 
     /**
@@ -162,7 +167,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 //        }
 //        startActivity(intent);
 //    }
-
 
 
     /**
@@ -200,5 +204,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
                 new ViewModelProvider.AndroidViewModelFactory(activity.getApplication())).get(cls);
     }
 
+
+//
 
 }
